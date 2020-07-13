@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>一覧表示</title>
+<meta charset="utf-8" />
+<style>
+table {
+  border-collapse: collapse;
+}
+.col_id {width: 50px;}
+.col_name {width: 120px;}
+.col_address {width: 230px;}
+.col_tel {width: 150px;}
+</style>
+</head>
+<body>
+<h3>販売管理システム：案件一覧</h3>
+<!-- <h2><span th:text="${message}"></span></h2> -->
+
+
+<form action="/Search" method="get">
+	<div  style="position: relative; left: 400px; top: -25px;">
+		<table>
+			<tr>
+				<td>名前：<input type="text" name="searchName" /></td>
+			</tr>
+			<tr>
+				<td>住所：<input type="text" name="searchAdd" /></td>
+			</tr>
+			<tr>
+				<td>電話番号：<input type="text" name="searchTel" /></td>
+			</tr>
+		</table>
+    	<input type="submit" name="searchbtn" value="検索"  />
+    	<!-- <input type="hidden" name="search" value="検索"> -->
+    </div>
+</form>
+
+<form action="/add">
+    <input type="submit" value="新規登録" style="WIDTH: 250px; HEIGHT: 20px" />
+</form>
+
+	<table border="1">
+	    <tr>
+	    	<th bgcolor="#bfefdf" class="col_No">№</th>
+	        <th bgcolor="#bfefdf" class="col_Kokyaku">顧客</th>
+	        <th bgcolor="#bfefdf" class="col_Juchu">受注日</th>
+	        <th bgcolor="#bfefdf" class="col_S_NO">S番号</th>
+     		<th bgcolor="#bfefdf" class="col_Kenmei">件名</th>
+     		<th bgcolor="#bfefdf" class="col_Suryo">数量</th>
+     		<th bgcolor="#bfefdf" class="col_ShiteiKingaku">納入指定日<BR>/受注金金額</th>
+     		<th bgcolor="#bfefdf" class="col_Status">ステータス</th>
+     		<th bgcolor="#bfefdf" class="col_dummy"></th>
+     		<th bgcolor="#bfefdf" class="col_dummy"></th>
+	        <th bgcolor="#bfefdf"></th>
+	        <th bgcolor="#bfefdf"></th>
+	    </tr>
+	     <tr th:each="Anken : ${anken}" th:object="${users}">
+
+
+	    	<td th:text="${Anken.id}"/></td>
+	    	<td align="center" th:text="${Anken.kokyaku}"/></td>
+	    	<td align="center" th:text="${Anken.juchu_day}"/></td>
+	        <td th:text="'S' + ${Anken.s_no}"/></td>
+	        <td align="center" th:text="${Anken.kenmei}"/></td>
+	        <td align="center" th:text="${Anken.suryo}"/></td>
+            <td align="center" th:text="${Anken.nounyu_day}"/></td>
+            <td align="center" th:text="${Anken.status}"/></td>
+            <td>
+			<div class="btn_area_center">
+	            <a th:href="@{/user/{id}/edit(id=${Anken.id})}">編集</a>
+	            <a th:href="@{/user/{id}/edit(id=${Anken.id})}">削除</a>
+			</div>
+	        </td>
+	        <td>
+	        <!--  <input type="hidden" name="category" th:value="${User.categoryid}" /> -->
+	        </td>
+	    </tr>
+	</table>
+	<!-- ページング作成後に開放
+        <div th:fragment='paginationbar'>
+            <ul class='pagination pagination-centered'>
+                <li th:class="${page.firstPage}?'disabled':''" style="display:inline">
+                    <span th:if='${page.firstPage}'>←先頭</span>
+                    <a th:if='${not page.firstPage}' th:href='@{${page.url}(searchName=${searchName},searchAdd=${searchAdd},page=0,size=${page.size})}'>←先頭</a>
+                </li>
+                <li th:class="${page.hasPreviousPage}? '' : 'disabled'" style="display:inline">
+                    <span th:if='${not page.hasPreviousPage}'>«</span>
+                    <a th:if='${page.hasPreviousPage}' th:href='@{${page.url}(searchName=${searchName},searchAdd=${searchAdd},page=${page.number-2},size=${page.size})}'>«</a>
+                </li>
+
+
+                <li th:each='item : ${page.items}' th:class="${item.current}? 'active' : ''" style="display:inline">
+                    <span th:if='${item.current}' th:text='${item.number}'>1</span>
+                    <a th:if='${not item.current}' th:href='@{${page.url}(searchName=${searchName},searchAdd=${searchAdd},page=${item.number-1},size=${page.size})}'>
+                    <span th:text='${item.number}'>1</span>
+                    </a>
+                </li>
+                <li th:class="${page.hasNextPage}? '' : 'disabled'" style="display:inline">
+                    <span th:if='${not page.hasNextPage}'>»</span>
+                    <a th:if='${page.hasNextPage}' th:href='@{${page.url}(searchName=${searchName},searchAdd=${searchAdd},page=${page.number},size=${page.size})}'>»</a>
+                </li>
+                <li th:class="${page.lastPage}? 'disabled' : ''" style="display:inline">
+                    <span th:if='${page.lastPage}'>末尾➝</span>
+                    <a th:if='${not page.lastPage}' th:href='@{${page.url}(searchName=${searchName},searchAdd=${searchAdd},page=${page.totalPages - 1},size=${page.size})}'>末尾➝</a>
+                </li>
+            </ul>
+
+        </div>
+        -->
+</body>
+</html>
