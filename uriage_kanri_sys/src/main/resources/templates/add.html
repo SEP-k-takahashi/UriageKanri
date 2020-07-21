@@ -1,10 +1,93 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>案件新規登録</title>
+    <link href="/css/add.css" rel="stylesheet"></link>
+    <meta charset="utf-8" />
+  </head>
+  <body>
 
-</body>
+    <h3>売上管理システム：案件新規登録</h3>
+    <form th:action="@{/addcheck}" th:object="${ankenRequest}" th:method="post">
+    <table>
+      <tr>
+        <th class="cell_title">顧客名</th>
+        <th class="cell_required">※</th>
+        <td><input type="text" th:field="*{kokyaku}"></td>
+      </tr>
+      <tr>
+        <th class="cell_title">受注日</th>
+        <th class="cell_required">※</th>
+        <td><input type="date" th:field="*{juchu_day}"></td>
+      </tr>
+      <tr>
+        <th class="cell_title">S番号</th>
+        <th class="cell_required"></th>
+        <td>S-<input type="text" th:field="*{s_no}"></td>
+      </tr>
+      <tr>
+        <th class="cell_title">件名</th>
+        <th class="cell_required"></th>
+        <td><input type="text" th:field="*{kenmei}"></td>
+      </tr>
+      <tr>
+        <th class="cell_title">数量</th>
+        <th class="cell_required"></th>
+        <td><input type="text" th:field="*{suryo}"></td>
+      </tr>
+      <tr>
+        <th class="cell_title">指定日</th>
+        <th class="cell_required"></th>
+        <td><input type="date" th:field="*{shitei_day}"></td>
+      </tr>
+      <tr>
+        <th class="cell_title">納入日</th>
+        <th class="cell_required"></th>
+        <td><input type="date" th:field="*{nounyu_day}"></td>
+      </tr>
+      <tr>
+        <th class="cell_title">請求日</th>
+        <th class="cell_required"></th>
+        <td><input type="date" th:field="*{seikyu_day}"></td>
+      </tr>
+      <tr>
+        <th class="cell_title">見積金額</th>
+        <th class="cell_required"></th>
+        <td><input type="text" th:field="*{mitsumori_kin}"></td>
+      </tr>
+      <tr>
+        <th class="cell_title">ステータス</th>
+        <th class="cell_required"></th>
+        <td><input type="text" th:field="*{status}"></td>
+      </tr>
+
+      <tr>
+        <th class="cell_title">受注金額</th>
+        <th class="cell_required"></th>
+        <td><input type="text" th:field="*{juchu_kin}"></td>
+      </tr>
+<!--      <tr>
+            <th class="cell_title">カテゴリ</th>
+            <th class="cell_required">※</th>
+            <td>
+				<select id="singleSelect" name="categoryid">
+	     			<option th:each="item : ${category}" th:text="${item.categoryname}" th:value="${item.categoryid}" th:class="${item.categoryname}" >singleSelect</option>
+					</select>
+				</td>
+
+	   </tr>
+-->
+    </table>
+    <div class="btn_area_center">
+    	<input type="submit" value="登録">
+    	<INPUT type="button" onClick='history.back();' value="戻る">
+    </div>
+
+  </form>
+  <table>
+    <tr th:if="${validationError}" th:each="error : ${validationError}">
+      <td style="color:red;" th:text="${error}"></td>
+    </tr>
+  </table>
+  </body>
 </html>

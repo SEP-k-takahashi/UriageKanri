@@ -48,23 +48,39 @@ table {
 	        <th bgcolor="#bfefdf" class="col_S_NO">S番号</th>
      		<th bgcolor="#bfefdf" class="col_Kenmei">件名</th>
      		<th bgcolor="#bfefdf" class="col_Suryo">数量</th>
-     		<th bgcolor="#bfefdf" class="col_ShiteiKingaku">納入指定日<BR>/受注金金額</th>
+     		<th bgcolor="#bfefdf" class="col_ShiteiKingaku" >納入指定日<BR>/納入日</th>
+     		<th bgcolor="#bfefdf" class="col_Status">請求日</th>
+     		<th bgcolor="#bfefdf" class="col_ShiteiKingaku" >見積金額<BR>/受注金額</th>
      		<th bgcolor="#bfefdf" class="col_Status">ステータス</th>
+
      		<th bgcolor="#bfefdf" class="col_dummy"></th>
      		<th bgcolor="#bfefdf" class="col_dummy"></th>
-	        <th bgcolor="#bfefdf"></th>
-	        <th bgcolor="#bfefdf"></th>
+
 	    </tr>
 	     <tr th:each="Anken : ${anken}" th:object="${users}">
 
 
 	    	<td th:text="${Anken.id}"/></td>
-	    	<td align="center" th:text="${Anken.kokyaku}"/></td>
+	    	<td align="center" th:text="${Anken.kokyakuEntity.kokyaku_mei}"/></td>
 	    	<td align="center" th:text="${Anken.juchu_day}"/></td>
 	        <td th:text="'S' + ${Anken.s_no}"/></td>
-	        <td align="center" th:text="${Anken.kenmei}"/></td>
+	       	<td align="center" th:text="${Anken.kenmei}"/></td>
 	        <td align="center" th:text="${Anken.suryo}"/></td>
-            <td align="center" th:text="${Anken.nounyu_day}"/></td>
+            <td align="center" />
+            	<p th:text="${Anken.shitei_day}"></p>
+            	<p th:text="${Anken.nounyu_day}"></p>
+            </td>
+            <td align="center" th:text="${Anken.seikyu_day}"/></td>
+            <td align="center"/>
+            	<div th:switch="${Anken.juchu_kin}">
+            		<p th:case="0" th:text="'&yen;' + ${Anken.mitsumori_kin}"></p>
+            		<p th:case="*" th:text="'&yen;' + ${#numbers.formatInteger(Anken.mitsumori_kin, 3, 'COMMA')}"></p>
+            	</div>
+            	<div th:switch="${Anken.juchu_kin}">
+            		<p th:case="0" th:text="'&yen;' + ${Anken.juchu_kin}"></p>
+            		<p th:case="*" th:text="'&yen;' + ${#numbers.formatInteger(Anken.juchu_kin, 3, 'COMMA')}"></p>
+            	</div>
+            </td>
             <td align="center" th:text="${Anken.status}"/></td>
             <td>
 			<div class="btn_area_center">

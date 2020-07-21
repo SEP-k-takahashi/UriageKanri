@@ -6,7 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
@@ -36,6 +40,7 @@ public class AnkenEntity {
 	@Column(name="suryo")
     private long suryo;
 	//指定日
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	@Column(name="shitei_day")
     private Date shitei_day;
 	//納入日
@@ -43,6 +48,7 @@ public class AnkenEntity {
     private Date nounyu_day;
 	//請求日
 	@Column(name="seikyu_day")
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Date seikyu_day;
 	//見積金額
 	@Column(name="mitsumori_kin")
@@ -57,4 +63,30 @@ public class AnkenEntity {
 	@Column(name="delete_flg")
 	private long delete_flg;
 
+    @ManyToOne
+    @JoinColumn(name="kokyaku",insertable = false, updatable = false)
+    private KokyakuEntity kokyakuEntity;
+
+    public KokyakuEntity getkokyakuEntiry() {
+        return kokyakuEntity;
+    }
+
+    public void setkokyakuEntiry(KokyakuEntity kokyakuEntity) {
+        this.kokyakuEntity = kokyakuEntity;
+    }
+/*
+    @ManyToOne
+    @JoinColumns({
+        @JoinColumn(name="kokyaku", referencedColumnName="kokyaku_id"),
+        @JoinColumn(name="status", referencedColumnName="status_id")
+    })
+    private StatusEntity stutusEntity;
+    public StatusEntity getstatusEntity() {
+        return stutusEntity;
+    }
+
+    public void setstatusEntiy(StatusEntity stutusEntity) {
+        this.stutusEntity = stutusEntity;
+    }
+*/
 }
