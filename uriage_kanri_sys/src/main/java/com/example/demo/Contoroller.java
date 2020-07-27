@@ -34,7 +34,8 @@ AnkenService ankenSerivice;
 public String getAllUsers(@Validated AnkenEntity Anken,  BindingResult result,
 			@PageableDefault(size = 5) Pageable pageable,
 			Model model) {
-	Page<AnkenEntity> page = ankenSerivice.searchAnkenAll(pageable);
+	//Page<AnkenEntity> page = ankenSerivice.searchAnkenAll(pageable);
+	Page<IchiranEntity> page = ankenSerivice.searchAnkenAll(pageable);
 
 	//model.addAttribute("users", page.getContent());
 	model.addAttribute("anken", page);
@@ -93,3 +94,4 @@ public void initBinder(WebDataBinder binder) {
     binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-mm-dd"), true));
 }
 }
+

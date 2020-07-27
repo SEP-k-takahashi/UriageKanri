@@ -12,13 +12,20 @@ import org.springframework.stereotype.Service;
 public class AnkenService {
 	@Autowired
 	AnkenRepository ankenReposirtory;
-
+	@Autowired
+	IchiranRepository ichiranReposirtory;
 	/**
 	   * 案件情報 全検索
 	   * @return 検索結果
 	   */
+	/*
 	public Page<AnkenEntity> searchAnkenAll(Pageable pageable) {
 		  Page<AnkenEntity> page = ankenReposirtory.findActiveAll(pageable);
+	    return page;
+	  }
+	  */
+	public Page<IchiranEntity> searchAnkenAll(Pageable pageable) {
+		  Page<IchiranEntity> page = ichiranReposirtory.findActiveAll(pageable);
 	    return page;
 	  }
 	/**
