@@ -49,11 +49,13 @@ return "list";
  */
 @GetMapping(value = "/add")
 public String displayAdd(Model model) {
-	AnkenRequest ankenRequest =  new AnkenRequest();
+
+  KokyakuEntity kokyaku = new KokyakuEntity();
+  StatusEntity status = new StatusEntity();
 
 
   model.addAttribute("ankenRequest", new AnkenRequest());
-  //model.addAttribute("category",category);
+  model.addAttribute("category",kokyaku);
   return "add";
 }
 /**

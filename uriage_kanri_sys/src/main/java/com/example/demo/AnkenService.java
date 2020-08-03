@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,10 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional(rollbackOn = Exception.class)
 public class AnkenService {
+	@Autowired
+	KokyakuRepository kokyakuReposirtory;
+	@Autowired
+	StatusRepository statusReposirtory;
 	@Autowired
 	AnkenRepository ankenReposirtory;
 	@Autowired
@@ -49,5 +55,21 @@ public class AnkenService {
 
 		ankenReposirtory.save(ankenentity);
 
+	  }
+	/**
+	   * 顧客情報 全取得
+	   * @return 顧客情報
+	   */
+	public List<KokyakuEntity> getKokyakuAll() {
+		List<KokyakuEntity> kokyaku = kokyakuReposirtory.findAll();
+	    return kokyaku;
+	  }
+	/**
+	   * ステータス情報 取得
+	   * @return ステータス情報
+	   */
+	public List<StatusEntity> getStatus(String koyaku) {
+		List<StatusEntity> Status = statusReposirtory.findStatus(koyaku);
+	    return Status;
 	  }
 }
