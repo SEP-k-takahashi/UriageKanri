@@ -72,4 +72,8 @@ public class AnkenService {
 		List<StatusEntity> Status = statusReposirtory.findStatus(koyaku);
 	    return Status;
 	  }
+	public List<StatusEntity> getStatusAll() {
+		List<StatusEntity> Status = statusReposirtory.findStatusAll();
+	    return Status;
+	  }
 }

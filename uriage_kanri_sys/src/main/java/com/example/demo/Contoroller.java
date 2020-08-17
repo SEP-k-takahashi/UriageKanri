@@ -50,12 +50,15 @@ return "list";
 @GetMapping(value = "/add")
 public String displayAdd(Model model) {
 
-  KokyakuEntity kokyaku = new KokyakuEntity();
-  StatusEntity status = new StatusEntity();
+  List<KokyakuEntity> kokyaku = ankenSerivice.getKokyakuAll();
+  List<StatusEntity> status = ankenSerivice.getStatus("1");
+  List<StatusEntity> statusAll = ankenSerivice.getStatusAll();
 
 
   model.addAttribute("ankenRequest", new AnkenRequest());
-  model.addAttribute("category",kokyaku);
+  model.addAttribute("kokyaku",kokyaku);
+  model.addAttribute("status",status);
+  model.addAttribute("statusAll",statusAll);
   return "add";
 }
 /**

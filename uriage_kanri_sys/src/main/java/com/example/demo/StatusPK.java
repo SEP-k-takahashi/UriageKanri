@@ -15,6 +15,6 @@ public class StatusPK implements Serializable {
 	  @Column(name = "status_id")
 	  private String status_id;
 
-	  @Column(name = "stasus_mei")
+	  @Column(name = "status_mei")
 	  private String status_mei;
 }

@@ -15,7 +15,7 @@ public class StatusEntity {
 	@Id
 	//ID
 	@Column(name="kokyaku_id")
-	private long kokyaku_id;
+	private String kokyaku_id;
 	//顧客名
 	@Id
 	@Column(name="status_id")

@@ -13,7 +13,12 @@
       <tr>
         <th class="cell_title">顧客名</th>
         <th class="cell_required">※</th>
-        <td><input type="text" th:field="*{kokyaku}"></td>
+        <!--  <td><input type="text" th:field="*{kokyaku}"></td> -->
+        <td>
+				<select id="singleSelect" name="kokyakuid">
+	     			<option th:each="item : ${kokyaku}" th:text="${item.kokyaku_mei}" th:value="${item.kokyaku_id}" th:class="${item.kokyaku_id}" >singleSelect</option>
+				</select>
+		</td>
       </tr>
       <tr>
         <th class="cell_title">受注日</th>
@@ -58,7 +63,15 @@
       <tr>
         <th class="cell_title">ステータス</th>
         <th class="cell_required"></th>
-        <td><input type="text" th:field="*{status}"></td>
+        <!-- <td><input type="text" th:field="*{status}"></td>  -->
+        <td>
+				<select id="singleSelect" name="statusid">
+	     			<option th:each="item : ${statusAll}" th:text="${item.status_mei}" th:value="${item.status_id}" th:class="${item.kokyaku_id}"  th:selected="${item.kokyaku_id == 1}" >singleSelect</option>
+				</select>
+				<select id="singleSelect2" name="statusid2">
+	     			<option th:each="item2 : ${statusAll}"  th:selected="${item2.kokyaku_id == 1}" >[[${item2.status_mei}]]</option>
+				</select>
+		</td>
       </tr>
 
       <tr>
